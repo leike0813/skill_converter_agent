@@ -1,0 +1,35 @@
+{
+    "id": "skill-converter-agent",
+    "version": "1.0.0",
+    "name": "Skill Converter Agent",
+    "description": "Directory-first converter for transforming a generic skill into a Skill-Runner AutoSkill package.",
+    "engines": [
+        "gemini",
+        "codex",
+        "iflow"
+    ],
+    "entrypoint": {
+        "prompts": {
+            "gemini": "Use skill `skill-converter-agent` in directory-first mode. If `source_type=directory`, convert in place using `source_dir={{ parameter.source_skill_path }}`. If `source_type=zip`, first run `zip_directory_wrapper.py --mode unpack` to a workspace directory, then run the same directory conversion logic, then optionally repack via `--mode pack`. Apply prompt-based classification and conversion. Always run final validator `validate_converted_skill.py`. Respect `mode={{ parameter.mode }}`, `target_skill_id={{ parameter.target_skill_id }}`, `default_engine={{ parameter.default_engine }}`, `strict={{ parameter.strict }}`, `emit_zip={{ parameter.emit_zip }}`. Return only final JSON.",
+            "iflow": "Use skill `skill-converter-agent` in directory-first mode. If `source_type=directory`, convert in place using `source_dir={{ parameter.source_skill_path }}`. If `source_type=zip`, first run `zip_directory_wrapper.py --mode unpack` to a workspace directory, then run the same directory conversion logic, then optionally repack via `--mode pack`. Apply prompt-based classification and conversion. Always run final validator `validate_converted_skill.py`. Respect `mode={{ parameter.mode }}`, `target_skill_id={{ parameter.target_skill_id }}`, `default_engine={{ parameter.default_engine }}`, `strict={{ parameter.strict }}`, `emit_zip={{ parameter.emit_zip }}`. Return only final JSON.",
+            "codex": "Use skill `skill-converter-agent` in directory-first mode. If `source_type=directory`, convert in place using `source_dir={{ parameter.source_skill_path }}`. If `source_type=zip`, first run `zip_directory_wrapper.py --mode unpack` to a workspace directory, then run the same directory conversion logic, then optionally repack via `--mode pack`. Apply prompt-based classification and conversion. Always run final validator `validate_converted_skill.py`. Respect `mode={{ parameter.mode }}`, `target_skill_id={{ parameter.target_skill_id }}`, `default_engine={{ parameter.default_engine }}`, `strict={{ parameter.strict }}`, `emit_zip={{ parameter.emit_zip }}`. Return only final JSON."
+        }
+    },
+    "schemas": {
+        "input": "assets/input.schema.json",
+        "parameter": "assets/parameter.schema.json",
+        "output": "assets/output.schema.json"
+    },
+    "artifacts": [
+        {
+            "role": "converted_skill_package",
+            "pattern": "converted_skill.zip",
+            "required": false
+        },
+        {
+            "role": "conversion_report",
+            "pattern": "conversion_report.json",
+            "required": false
+        }
+    ]
+}

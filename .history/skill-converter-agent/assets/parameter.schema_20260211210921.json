@@ -1,0 +1,73 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "source_type": {
+            "type": "string",
+            "enum": [
+                "directory",
+                "zip"
+            ],
+            "default": "directory",
+            "description": "Source input type. Directory is the primary mode."
+        },
+        "source_skill_path": {
+            "type": "string",
+            "default": "",
+            "description": "Source skill root directory path for directory mode."
+        },
+        "mode": {
+            "type": "string",
+            "enum": [
+                "interactive",
+                "auto"
+            ],
+            "default": "interactive",
+            "description": "Conversion decision mode."
+        },
+        "target_skill_id": {
+            "type": "string",
+            "default": "",
+            "description": "Optional explicit skill id for output package."
+        },
+        "default_engine": {
+            "type": "string",
+            "enum": [
+                "gemini",
+                "codex",
+                "iflow"
+            ],
+            "default": "gemini",
+            "description": "Fallback engine when source metadata has no engines."
+        },
+        "strict": {
+            "type": "boolean",
+            "default": false,
+            "description": "Fail when recoverable conversion warnings occur."
+        },
+        "emit_zip": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether to emit converted_skill.zip in directory mode."
+        }
+    },
+    "allOf": [
+        {
+            "if": {
+                "properties": {
+                    "source_type": {
+                        "const": "directory"
+                    }
+                },
+                "required": [
+                    "source_type"
+                ]
+            },
+            "then": {
+                "required": [
+                    "source_skill_path"
+                ]
+            }
+        }
+    }
+}
