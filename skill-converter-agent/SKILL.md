@@ -1,6 +1,6 @@
 ---
 name: skill-converter-agent
-description: 目录优先的 Skill 转换代理，将普通 skill 改造为 Skill-Runner 可执行 skill 包。
+description: Transform an ordinary skill that conforms to the Open Agent Skills specification into an AutoSkill package with input/output/execution contracts. Use this skill when you need to convert an ordinary Skill into an executable business package for Skill-Runner or Zotero-Agents, or to normalize the input/output of other skills.
 ---
 
 # 目标
